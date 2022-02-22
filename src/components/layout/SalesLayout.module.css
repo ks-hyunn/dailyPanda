@@ -1,0 +1,21 @@
+.titleBox {
+  margin: 80px 15% 20px 15%;
+  width: 70%;
+  min-width: 900px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 55px;
+  margin-right: 16px;
+}
+
+.redStar {
+  color: red;
+}
+
+.h1 {
+  margin: 0;
+  font-weight: 500;
+}
