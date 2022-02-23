@@ -1,6 +1,6 @@
 import styles from "./Input.module.css";
 
-const Input = (props) => {
+const Select = (props) => {
   return (
     <div className={styles.inputBox}>
       <div className={props.className}>
@@ -8,10 +8,10 @@ const Input = (props) => {
           <span className={styles.redStar}>{props.redStar}</span>
           {props.label}
         </label>
-        <input {...props.input} />
+        <select {...props.input}>{props.children}</select>
       </div>
     </div>
   );
 };
 
-export default Input;
+export default Select;

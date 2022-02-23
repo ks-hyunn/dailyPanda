@@ -1,8 +1,20 @@
-.input {
+.inputBox {
+  width: 45%;
+  text-align: end;
 }
 
-.input label {
+.inputBox input,
+.inputBox select {
+  padding: 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 0 0 6px 12px;
+  width: 70%;
+  height: 30px;
+  box-sizing: border-box;
 }
 
-.input input {
+.redStar {
+  color: red;
+  margin: 8px 12px 0 0;
 }

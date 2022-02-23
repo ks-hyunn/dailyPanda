@@ -1,4 +1,5 @@
 import SalesLayout from "../components/layout/SalesLayout";
+import WriteUser from "../components/WriteUser";
 import ContentCard from "../UI/ContentCard";
 
 const SalesWrite = () => {
@@ -10,7 +11,9 @@ const SalesWrite = () => {
         star={" * "}
         sub={"는 필수항목 입니다.)"}
       />
-      <ContentCard>asd</ContentCard>
+      <ContentCard>
+        <WriteUser />
+      </ContentCard>
     </>
   );
 };
