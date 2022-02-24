@@ -80,8 +80,67 @@ const WriteUser = () => {
             <option value="agencyChange">번호이동</option>
             <option value="changePhone">기기변경</option>
           </Select>
+          <Select label="단말기할부">
+            <option value="24개월">24개월</option>
+            <option value="30개월">30개월</option>
+            <option value="36개월">36개월</option>
+            <option value="48개월">48개월</option>
+            <option value="기타">기타</option>
+          </Select>
+          <Select label="유심비">
+            <option value="후납">후납</option>
+            <option value="선납">선납</option>
+            <option value="대납">대납</option>
+            <option value="미구매">미구매</option>
+          </Select>
+          <Input label="요금제" />
+          <Input label="부가서비스" />
         </div>
       </section>
+      <section>
+        <h4 className={styles.title}>할부원금</h4>
+        <div className={styles.salesInfo}>
+          <Input label="출고가" input={{ type: "tel" }} />
+          <Select label="지원선택">
+            <option value="공시지원">공시지원</option>
+            <option value="선택약정">선택약정</option>
+          </Select>
+          <Input label="공시지원금" input={{ type: "tel" }} />
+          <Input label="추가지원금" input={{ type: "tel" }} />
+          <Input label="현금납부" input={{ type: "tel" }} />
+          <Input
+            className={styles.disabledInput}
+            label="할부원금"
+            input={{ type: "tel", disabled: true }}
+          />
+        </div>
+      </section>
+      <section>
+        <h4 className={styles.title}>정산정보</h4>
+        <div className={styles.salesInfo}>
+          <Input label="기본정책" input={{ type: "tel" }} />
+          <Input label="추가정책" input={{ type: "tel" }} />
+          <Input label="할인금액" input={{ type: "tel" }} />
+          <Input
+            className={styles.disabledInput}
+            label="판매마진"
+            input={{ type: "tel" }}
+          />
+        </div>
+      </section>
+      <section>
+        <h4 className={styles.title}>기타정보</h4>
+        <div className={styles.salesInfo}>
+          <Input label="서류첨부" input={{ type: "file" }} />
+          <Input label="메모" />
+          <Input label="판매직원" />
+          <Input label="정책번호" />
+        </div>
+      </section>
+      <div className={styles.btnBox}>
+        <button className={styles.btnRed}>취소</button>
+        <button className={styles.btn}>등록합니다</button>
+      </div>
     </form>
   );
 };
