@@ -1,8 +1,8 @@
-.logInBox {
+.signBox {
   margin: 80px 30% 0 30%;
   width: 40%;
   min-width: 500px;
-  height: 200px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,8 +17,9 @@
   width: 100%;
 }
 
-.loginId,
-.loginPassword {
+.signId,
+.signPassword,
+.signStore {
   width: 50%;
   text-align: end;
   margin-right: 15%;
@@ -34,10 +35,20 @@
   box-sizing: border-box;
 }
 
-.button button {
+.btn {
   padding: 8px 16px;
   color: white;
   background-color: #16a3b8;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin: 8px 16px 0 0;
+}
+
+.redBtn {
+  padding: 8px 16px;
+  color: white;
+  background-color: #f06e6e;
   border-radius: 8px;
   border: none;
   cursor: pointer;

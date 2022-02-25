@@ -8,7 +8,7 @@ const Input = (props) => {
           <span className={styles.redStar}>{props.redStar}</span>
           {props.label}
         </label>
-        <input {...props.input} />
+        <input className={props.inputClass} {...props.input} />
       </div>
     </div>
   );

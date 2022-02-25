@@ -1,36 +1,44 @@
 import styles from "./WriteUser.module.css";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
+import { Link } from "react-router-dom";
 
 const WriteUser = () => {
   return (
     <form>
-      <div className={styles.phoneUsim}>
-        <section className={styles.phoneBox}>
-          <h4 className={styles.title}>단말기</h4>
-          <div className={styles.phone}>
-            <Input
-              className={styles.phoneInput}
-              redStar="*"
-              label="일련번호"
-              input={{
-                placeholder: "단말기 일련번호를 입력해주세요.",
-                required: true,
-              }}
-            />
-          </div>
-        </section>
-        <section className={styles.usimBox}>
-          <h4 className={styles.title}>유심</h4>
-          <div className={styles.usim}>
-            <Input
-              className={styles.usimInput}
-              label="일련번호"
-              input={{ placeholder: "유심 일련번호를 입력해주세요." }}
-            />
-          </div>
-        </section>
-      </div>
+      <section>
+        <h4 className={styles.title}>단말기</h4>
+        <div className={styles.salesInfo}>
+          <Input
+            className={styles.phoneInput}
+            redStar="*"
+            label="모델명"
+            input={{
+              placeholder: "단말기 모델명을 입력해주세요.",
+              required: true,
+            }}
+          />
+          <Input
+            className={styles.phoneInput}
+            redStar="*"
+            label="일련번호"
+            input={{
+              placeholder: "단말기 일련번호를 입력해주세요.",
+              required: true,
+            }}
+          />
+        </div>
+      </section>
+      <section>
+        <h4 className={styles.title}>유심</h4>
+        <div className={styles.salesInfo}>
+          <Input
+            className={styles.usimInput}
+            label="일련번호"
+            input={{ placeholder: "유심 일련번호를 입력해주세요." }}
+          />
+        </div>
+      </section>
       <section>
         <h4 className={styles.title}>가입정보</h4>
         <div className={styles.salesInfo}>
@@ -100,31 +108,33 @@ const WriteUser = () => {
       <section>
         <h4 className={styles.title}>할부원금</h4>
         <div className={styles.salesInfo}>
-          <Input label="출고가" input={{ type: "tel" }} />
+          <Input inputClass={styles.rightText} label="출고가" />
           <Select label="지원선택">
             <option value="공시지원">공시지원</option>
             <option value="선택약정">선택약정</option>
           </Select>
-          <Input label="공시지원금" input={{ type: "tel" }} />
-          <Input label="추가지원금" input={{ type: "tel" }} />
-          <Input label="현금납부" input={{ type: "tel" }} />
+          <Input label="공시지원금" inputClass={styles.rightText} />
+          <Input label="추가지원금" inputClass={styles.rightText} />
+          <Input label="현금납부" inputClass={styles.rightText} />
           <Input
+            inputClass={styles.rightText}
             className={styles.disabledInput}
             label="할부원금"
-            input={{ type: "tel", disabled: true }}
+            input={{ disabled: true }}
           />
         </div>
       </section>
       <section>
         <h4 className={styles.title}>정산정보</h4>
         <div className={styles.salesInfo}>
-          <Input label="기본정책" input={{ type: "tel" }} />
-          <Input label="추가정책" input={{ type: "tel" }} />
-          <Input label="할인금액" input={{ type: "tel" }} />
+          <Input label="기본정책" inputClass={styles.rightText} />
+          <Input label="추가정책" inputClass={styles.rightText} />
+          <Input label="할인금액" inputClass={styles.rightText} />
           <Input
+            inputClass={styles.rightText}
             className={styles.disabledInput}
             label="판매마진"
-            input={{ type: "tel" }}
+            input={{ disabled: true }}
           />
         </div>
       </section>
@@ -138,7 +148,9 @@ const WriteUser = () => {
         </div>
       </section>
       <div className={styles.btnBox}>
-        <button className={styles.btnRed}>취소</button>
+        <Link to="/sales-list">
+          <button className={styles.btnRed}>취소</button>
+        </Link>
         <button className={styles.btn}>등록합니다</button>
       </div>
     </form>

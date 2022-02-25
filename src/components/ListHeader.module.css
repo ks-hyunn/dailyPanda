@@ -1,0 +1,54 @@
+.listCard {
+  margin-top: 20px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin-left: 12px;
+  box-sizing: border-box;
+}
+
+.head {
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 12px;
+  text-align: center;
+  font-size: 18px;
+  color: gray;
+}
+
+.roxhddlf {
+  min-width: 85px;
+}
+
+.xhdtlstk {
+  min-width: 80px;
+}
+
+.rhroraud {
+  min-width: 80px;
+}
+
+.roxhdqjsgh {
+  min-width: 150px;
+}
+
+.roxhdwhdfb {
+  min-width: 70px;
+}
+
+.ahepfaud {
+  min-width: 150px;
+}
+
+.vksaoakwls {
+  min-width: 80px;
+  color: tomato;
+}
+
+.vksaoakwlsHead {
+  min-width: 80px;
+}
+
+.vksaowlrdnjs {
+  min-width: 80px;
+}

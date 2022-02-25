@@ -1,0 +1,52 @@
+.customerList {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 6px 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.roxhddlf {
+  min-width: 85px;
+}
+
+.xhdtlstk {
+  min-width: 80px;
+}
+
+.rhroraud {
+  min-width: 80px;
+}
+
+.roxhdqjsgh {
+  min-width: 150px;
+}
+
+.roxhdwhdfb {
+  min-width: 70px;
+}
+
+.ahepfaud {
+  min-width: 150px;
+}
+
+.vksaoakwls {
+  min-width: 80px;
+  color: tomato;
+}
+
+.vksaoakwlsHead {
+  min-width: 80px;
+}
+
+.vksaowlrdnjs {
+  min-width: 80px;
+}
+
+.changeGreen {
+  color: rgb(9, 168, 115);
+  margin-left: 3px;
+  cursor: pointer;
+}

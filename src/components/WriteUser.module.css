@@ -4,21 +4,6 @@
   padding: 6px;
 }
 
-.phoneUsim {
-  display: flex;
-  justify-content: space-between;
-}
-
-.phoneBox,
-.usimBox {
-  width: 45%;
-}
-
-.phoneInput,
-.usimInput {
-  width: 220%;
-}
-
 .salesInfo {
   display: flex;
   justify-content: space-between;
@@ -51,4 +36,8 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
+}
+
+.rightText {
+  text-align: end;
 }
