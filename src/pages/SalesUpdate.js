@@ -1,8 +1,8 @@
 import SalesLayout from "../components/layout/SalesLayout";
-import WriteUser from "../components/WriteUser";
+import UpdateUser from "../components/UpdateUser";
 import ContentCard from "../UI/ContentCard";
 
-const SalesWrite = (props) => {
+const SalesUpdate = (props) => {
   return (
     <>
       <SalesLayout
@@ -12,10 +12,14 @@ const SalesWrite = (props) => {
         sub={"는 필수항목 입니다.)"}
       />
       <ContentCard>
-        <WriteUser userData={props.userData} />
+        <UpdateUser
+          userData={props.userData}
+          setDbData={props.setDbData}
+          dbData={props.dbData}
+        />
       </ContentCard>
     </>
   );
 };
 
-export default SalesWrite;
+export default SalesUpdate;

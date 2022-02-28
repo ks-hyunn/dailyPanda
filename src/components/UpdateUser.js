@@ -1,16 +1,27 @@
 import styles from "./WriteUser.module.css";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { db } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
-const WriteUser = (props) => {
+const UpdateUser = (props) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const index = searchParams.get("index");
+
   const navigate = useNavigate();
   const nowDate = new Date().toISOString().substring(0, 10);
-  const date = new Date().getTime().toString();
 
+  const [dbId, setDbId] = useState("");
+  // const [dbData, setDbData] = useState([]);
   const [inputs, setInputs] = useState({
     모델명: "",
     일련번호: "",
@@ -70,6 +81,18 @@ const WriteUser = (props) => {
     정책번호,
   } = inputs;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const readDb = await getDocs(collection(db, props.userData.uid));
+      const readDbId = await getDoc(
+        doc(db, props.userData.uid, readDb.docs[index].id)
+      );
+      setInputs(readDbId.data());
+      setDbId(readDb.docs[index].id);
+    };
+    fetchData();
+  }, []);
+
   const onChange = (e) => {
     const { value, name } = e.target;
     setInputs({
@@ -116,7 +139,8 @@ const WriteUser = (props) => {
     }
   };
   const updateDb = async () => {
-    const docRef = await setDoc(doc(db, props.userData.uid, date), inputs);
+    const docRef = doc(db, props.userData.uid, dbId);
+    const updateInfo = await setDoc(docRef, inputs);
   };
 
   const onSubmit = async (e) => {
@@ -398,4 +422,4 @@ const WriteUser = (props) => {
   );
 };
 
-export default WriteUser;
+export default UpdateUser;
