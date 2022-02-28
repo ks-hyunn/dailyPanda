@@ -29,7 +29,7 @@ const LogIn = (props) => {
       await setPersistence(auth, browserSessionPersistence);
       await logInService(auth, email, password);
       props.setIsLogIn(true);
-      navigate("/sales-list");
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }

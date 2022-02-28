@@ -12,8 +12,9 @@ function App() {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const sessionKey = sessionStorage.key("firebase");
-    const sessionUser = sessionStorage.getItem(sessionKey);
+    const sessionUser = sessionStorage.getItem(
+      "firebase:authUser:AIzaSyD4rTHSLEpLNQ_lpXs926g4N8RDc2fldmo:[DEFAULT]"
+    );
     if (sessionUser) {
       setUserData(JSON.parse(sessionUser));
       setIsLogIn(true);

@@ -8,7 +8,14 @@ const Input = (props) => {
           <span className={styles.redStar}>{props.redStar}</span>
           {props.label}
         </label>
-        <input className={props.inputClass} {...props.input} />
+        <input
+          onChange={props.onChange}
+          onBlur={props.onBlur}
+          name={props.label}
+          className={props.inputClass}
+          disabled={props.disabled}
+          {...props.input}
+        />
       </div>
     </div>
   );

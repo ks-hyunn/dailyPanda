@@ -8,7 +8,14 @@ const Select = (props) => {
           <span className={styles.redStar}>{props.redStar}</span>
           {props.label}
         </label>
-        <select {...props.input}>{props.children}</select>
+        <select
+          onBlur={props.onBlur}
+          onChange={props.onChange}
+          name={props.label}
+          {...props.input}
+        >
+          {props.children}
+        </select>
       </div>
     </div>
   );
