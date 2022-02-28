@@ -1,8 +1,19 @@
 import styles from "./Header.module.css";
 import { SiFoodpanda } from "react-icons/si";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { authGet } from "../../firebase";
 
-const Header = () => {
+const Header = (props) => {
+  const navigate = useNavigate();
+
+  const auth = authGet();
+
+  const onClick = async () => {
+    await auth.signOut();
+    await props.setIsLogIn(false);
+    navigate("/");
+  };
+
   return (
     <div className={styles.header}>
       <Link to="/">
@@ -20,8 +31,18 @@ const Header = () => {
         </Link>
       </div>
       <div className={styles.userUi}>
-        <div>스마일통신</div>
-        <div>로그아웃</div>
+        {props.isLogIn ? (
+          <>
+            <div>{props.userData.displayName}</div>
+            <button onClick={onClick} className={styles.navBtn}>
+              로그아웃
+            </button>
+          </>
+        ) : (
+          <Link to="/log-in">
+            <button className={styles.navBtn}>로그인</button>
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import SalesLayout from "../components/layout/SalesLayout";
 import ContentCard from "../UI/ContentCard";
-import ListUser from "../components/ListUser";
+import ListUser from "../components/list/ListUser";
 
 const SalesList = () => {
   return (

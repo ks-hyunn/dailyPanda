@@ -1,7 +1,7 @@
-import Sign from "../components/Sign";
+import Sign from "../components/user/Sign";
 
-const SignUp = () => {
-  return <Sign />;
+const SignUp = (props) => {
+  return <Sign setIsLogIn={props.setIsLogIn} />;
 };
 
 export default SignUp;
