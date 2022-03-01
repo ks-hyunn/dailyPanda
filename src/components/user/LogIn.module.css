@@ -43,3 +43,8 @@
   cursor: pointer;
   margin: 8px 16px 0 0;
 }
+
+.error {
+  color: red;
+  font-weight: 700;
+}

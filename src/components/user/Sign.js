@@ -36,7 +36,11 @@ const Sign = (props) => {
       props.setIsLogIn(true);
       navigate("/");
     } catch (error) {
-      setError(error.message);
+      if (error.message.includes("already")) {
+        setError("이미 등록된 이메일 입니다.");
+      } else if (error.message.includes("invalid-email")) {
+        setError("유효한 이메일을 입력해주세요.");
+      }
     }
   };
 
@@ -69,7 +73,7 @@ const Sign = (props) => {
           <label>매장명</label>
           <input onChange={onChange} value={store} name="store" required />
         </div>
-        {error && <p>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
         <div>
           <Link to="/">
             <button className={styles.redBtn}>취소</button>

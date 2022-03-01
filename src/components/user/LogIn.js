@@ -31,7 +31,11 @@ const LogIn = (props) => {
       props.setIsLogIn(true);
       navigate("/");
     } catch (error) {
-      setError(error.message);
+      if (error.message.includes("wrong-password")) {
+        setError("비밀번호가 일치하지 않습니다.");
+      } else if (error.message.includes("user-not-found")) {
+        setError("등록된 이메일이 아닙니다.");
+      }
     }
   };
 
@@ -60,7 +64,7 @@ const LogIn = (props) => {
             minLength="7"
           />
         </div>
-        {error !== null && <p>{error}</p>}
+        {error !== null && <p className={styles.error}>{error}</p>}
         <div className={styles.button}>
           <button>로그인</button>
           <Link to="/sign-up">
