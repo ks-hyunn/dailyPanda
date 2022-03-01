@@ -45,8 +45,24 @@
   min-width: 80px;
 }
 
-.changeGreen {
+.clickBtn {
+  min-width: 80px;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.update {
   color: rgb(9, 168, 115);
-  margin-left: 3px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.delete {
+  color: red;
+  margin-left: 6px;
   cursor: pointer;
 }

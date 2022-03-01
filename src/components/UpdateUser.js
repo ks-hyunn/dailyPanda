@@ -4,14 +4,7 @@ import Select from "../UI/Select";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { db } from "../firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const UpdateUser = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,8 +13,6 @@ const UpdateUser = (props) => {
   const navigate = useNavigate();
   const nowDate = new Date().toISOString().substring(0, 10);
 
-  const [dbId, setDbId] = useState("");
-  // const [dbData, setDbData] = useState([]);
   const [inputs, setInputs] = useState({
     모델명: "",
     일련번호: "",
@@ -50,6 +41,7 @@ const UpdateUser = (props) => {
     메모: "",
     판매직원: "",
     정책번호: "",
+    작성: "",
   });
   const {
     모델명,
@@ -83,12 +75,8 @@ const UpdateUser = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const readDb = await getDocs(collection(db, props.userData.uid));
-      const readDbId = await getDoc(
-        doc(db, props.userData.uid, readDb.docs[index].id)
-      );
-      setInputs(readDbId.data());
-      setDbId(readDb.docs[index].id);
+      const readDb = await getDoc(doc(db, props.userData.uid, index));
+      setInputs(readDb.data());
     };
     fetchData();
   }, []);
@@ -139,7 +127,7 @@ const UpdateUser = (props) => {
     }
   };
   const updateDb = async () => {
-    const docRef = doc(db, props.userData.uid, dbId);
+    const docRef = doc(db, props.userData.uid, index);
     const updateInfo = await setDoc(docRef, inputs);
   };
 

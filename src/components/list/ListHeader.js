@@ -12,6 +12,7 @@ const ListHeader = (props) => {
         <div className={styles.ahepfaud}>모델명</div>
         <div className={styles.vksaoakwlsHead}>판매마진</div>
         <div className={styles.vksaowlrdnjs}>판매직원</div>
+        <div className={styles.btn}>수정/삭제</div>
       </div>
       {props.children}
     </div>

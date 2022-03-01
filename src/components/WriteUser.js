@@ -39,6 +39,7 @@ const WriteUser = (props) => {
     메모: "",
     판매직원: "",
     정책번호: "",
+    작성: date,
   });
   const {
     모델명,
@@ -116,7 +117,10 @@ const WriteUser = (props) => {
     }
   };
   const updateDb = async () => {
-    const docRef = await setDoc(doc(db, props.userData.uid, date), inputs);
+    const docRef = await setDoc(
+      doc(db, props.userData.uid, inputs.작성),
+      inputs
+    );
   };
 
   const onSubmit = async (e) => {
