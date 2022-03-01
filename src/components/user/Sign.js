@@ -17,11 +17,11 @@ const Sign = (props) => {
       target: { name, value },
     } = e;
     if (name === "email") {
-      setEmail(value);
+      setEmail(value.replace(/ /g, ""));
     } else if (name === "password") {
-      setPassword(value);
+      setPassword(value.replace(/ /g, ""));
     } else if (name === "store") {
-      setStore(value);
+      setStore(value.replace(/ /g, ""));
     }
   };
 

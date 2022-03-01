@@ -75,7 +75,7 @@ const WriteUser = (props) => {
     const { value, name } = e.target;
     setInputs({
       ...inputs,
-      [name]: value,
+      [name]: value.replace(/ /g, ""),
     });
   };
 
@@ -84,7 +84,7 @@ const WriteUser = (props) => {
     if (지원선택 !== "선택약정") {
       setInputs({
         ...inputs,
-        [name]: value,
+        [name]: value.replace(/ /g, ""),
         할부원금:
           Number(출고가) -
           (Number(공시지원금) + Number(추가지원금) + Number(현금납부)),
@@ -92,7 +92,7 @@ const WriteUser = (props) => {
     } else {
       setInputs({
         ...inputs,
-        [name]: value,
+        [name]: value.replace(/ /g, ""),
         공시지원금: "",
         추가지원금: "",
         할부원금: Number(출고가) - Number(현금납부),
@@ -105,13 +105,13 @@ const WriteUser = (props) => {
     if (유심비 !== "대납") {
       setInputs({
         ...inputs,
-        [name]: value,
+        [name]: value.replace(/ /g, ""),
         판매마진: Number(기본정책) + Number(추가정책) - Number(할인금액),
       });
     } else {
       setInputs({
         ...inputs,
-        [name]: value,
+        [name]: value.replace(/ /g, ""),
         판매마진: Number(기본정책) + Number(추가정책) - Number(할인금액) - 7700,
       });
     }
