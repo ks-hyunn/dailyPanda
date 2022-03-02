@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import { MdOpenInNew } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import styles from "./ListUser.module.css";
+
 import ListSearch from "./ListSearch";
 import ListHeader from "./ListHeader";
-import { Link, useNavigate } from "react-router-dom";
+
 import { db } from "../../firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 const ListUser = ({ userData }) => {
   const navigate = useNavigate();
@@ -26,9 +30,12 @@ const ListUser = ({ userData }) => {
   }, []);
 
   const onClick = async (e) => {
+    const storage = getStorage();
     const target = e.target.id;
     if (window.confirm("삭제하시겠습니까?")) {
       await deleteDoc(doc(db, userData.uid, target));
+      const deleteRef = ref(storage, `${userData.uid}/${target}`);
+      await deleteObject(deleteRef);
       navigate("/sales-list", { replace: true });
     }
   };

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { db } from "../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadString } from "firebase/storage";
 
 const UpdateUser = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +14,8 @@ const UpdateUser = (props) => {
   const navigate = useNavigate();
   const nowDate = new Date().toISOString().substring(0, 10);
 
+  const [fileTarget, setFileTarget] = useState("");
+  const [fileData, setFileData] = useState("");
   const [inputs, setInputs] = useState({
     모델명: "",
     일련번호: "",
@@ -37,7 +40,6 @@ const UpdateUser = (props) => {
     추가정책: "",
     할인금액: "",
     판매마진: 0,
-    서류첨부: "",
     메모: "",
     판매직원: "",
     정책번호: "",
@@ -67,7 +69,6 @@ const UpdateUser = (props) => {
     추가정책,
     할인금액,
     판매마진,
-    서류첨부,
     메모,
     판매직원,
     정책번호,
@@ -126,14 +127,36 @@ const UpdateUser = (props) => {
       });
     }
   };
+
   const updateDb = async () => {
     const docRef = doc(db, props.userData.uid, index);
     const updateInfo = await setDoc(docRef, inputs);
   };
 
+  const onFileChange = (e) => {
+    setFileTarget(e.target.value);
+    const reader = new FileReader();
+    const files = Array.from(e.target.files);
+    if (files.length !== 0) {
+      reader.readAsDataURL(files[0]);
+      reader.onload = (e) => {
+        setFileData(e.target.result);
+      };
+    }
+  };
+
+  const uploadFile = async () => {
+    if (fileTarget !== "") {
+      const storage = getStorage();
+      const file = ref(storage, `${props.userData.uid}/${inputs.작성}`);
+      const fileUpload = await uploadString(file, fileData, "data_url");
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     await updateDb();
+    await uploadFile();
     navigate("/sales-list");
   };
 
@@ -376,9 +399,9 @@ const UpdateUser = (props) => {
         <h4 className={styles.title}>기타정보</h4>
         <div className={styles.salesInfo}>
           <Input
-            onChange={onChange}
+            onChange={onFileChange}
             label="서류첨부"
-            input={{ type: "file", value: 서류첨부 }}
+            input={{ type: "file" }}
           />
           <Input onChange={onChange} label="메모" input={{ value: 메모 }} />
           <Input
