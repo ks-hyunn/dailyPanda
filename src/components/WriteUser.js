@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
+
 import styles from "./WriteUser.module.css";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadString } from "firebase/storage";
@@ -12,6 +15,7 @@ const WriteUser = (props) => {
   const nowDate = new Date().toISOString().substring(0, 10);
   const date = new Date().getTime().toString();
 
+  const [modalOpen, setModalOpen] = useState(false);
   const [fileTarget, setFileTarget] = useState("");
   const [fileData, setFileData] = useState("");
   const [inputs, setInputs] = useState({
@@ -153,6 +157,13 @@ const WriteUser = (props) => {
 
   const onClick = () => {
     navigate("/sales-list");
+  };
+
+  const onClickImg = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -408,6 +419,35 @@ const WriteUser = (props) => {
         </div>
       </section>
       <div className={styles.btnBox}>
+        {fileTarget !== "" && (
+          <>
+            <button
+              onClick={onClickImg}
+              type="button"
+              className={styles.btnGreen}
+            >
+              서류 미리보기
+            </button>
+            <Modal
+              isOpen={modalOpen}
+              onRequestClose={closeModal}
+              ariaHideApp={false}
+              style={{
+                overlay: {
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                },
+                content: {
+                  top: "10%",
+                  left: "5%",
+                  right: "5%",
+                  bottom: "5%",
+                },
+              }}
+            >
+              <img className={styles.img} src={fileData} alt="서류 미리보기" />
+            </Modal>
+          </>
+        )}
         <button
           onClick={onClick}
           type="button"

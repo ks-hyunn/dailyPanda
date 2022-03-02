@@ -1,26 +1,36 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Modal from "react-modal";
+
 import styles from "./WriteUser.module.css";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+
 import { db } from "../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadString } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
 
 const UpdateUser = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const index = searchParams.get("index");
+  const storage = getStorage();
 
   const navigate = useNavigate();
-  const nowDate = new Date().toISOString().substring(0, 10);
 
+  const [fileURL, setFileURL] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [fileTarget, setFileTarget] = useState("");
-  const [fileData, setFileData] = useState("");
+  const [fileData, setFileData] = useState();
   const [inputs, setInputs] = useState({
     모델명: "",
     일련번호: "",
     유심번호: "",
-    개통일자: nowDate,
+    개통일자: "",
     개통번호: "",
     고객명: "",
     생년월일: "",
@@ -35,16 +45,17 @@ const UpdateUser = (props) => {
     공시지원금: "",
     추가지원금: "",
     현금납부: "",
-    할부원금: 0,
+    할부원금: "",
     기본정책: "",
     추가정책: "",
     할인금액: "",
-    판매마진: 0,
+    판매마진: "",
     메모: "",
     판매직원: "",
     정책번호: "",
     작성: "",
   });
+
   const {
     모델명,
     일련번호,
@@ -79,7 +90,14 @@ const UpdateUser = (props) => {
       const readDb = await getDoc(doc(db, props.userData.uid, index));
       setInputs(readDb.data());
     };
+    const fetchFile = async () => {
+      const getUrl = await getDownloadURL(
+        ref(storage, `${props.userData.uid}/${index}`)
+      );
+      setFileURL(getUrl);
+    };
     fetchData();
+    fetchFile();
   }, []);
 
   const onChange = (e) => {
@@ -147,7 +165,6 @@ const UpdateUser = (props) => {
 
   const uploadFile = async () => {
     if (fileTarget !== "") {
-      const storage = getStorage();
       const file = ref(storage, `${props.userData.uid}/${inputs.작성}`);
       const fileUpload = await uploadString(file, fileData, "data_url");
     }
@@ -162,6 +179,13 @@ const UpdateUser = (props) => {
 
   const onClick = () => {
     navigate("/sales-list");
+  };
+
+  const onClickImg = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -401,7 +425,7 @@ const UpdateUser = (props) => {
           <Input
             onChange={onFileChange}
             label="서류첨부"
-            input={{ type: "file" }}
+            input={{ type: "file", defaultValue: fileData }}
           />
           <Input onChange={onChange} label="메모" input={{ value: 메모 }} />
           <Input
@@ -417,6 +441,68 @@ const UpdateUser = (props) => {
         </div>
       </section>
       <div className={styles.btnBox}>
+        {fileTarget !== "" && (
+          <>
+            <button
+              onClick={onClickImg}
+              type="button"
+              className={styles.btnGreen}
+            >
+              서류 미리보기(수정)
+            </button>
+            <Modal
+              isOpen={modalOpen}
+              onRequestClose={closeModal}
+              ariaHideApp={false}
+              style={{
+                overlay: {
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                },
+                content: {
+                  top: "10%",
+                  left: "5%",
+                  right: "5%",
+                  bottom: "5%",
+                },
+              }}
+            >
+              <img
+                className={styles.img}
+                src={fileData}
+                alt="서류 미리보기(수정)"
+              />
+            </Modal>
+          </>
+        )}
+        {fileURL && (
+          <>
+            <button
+              onClick={onClickImg}
+              type="button"
+              className={styles.btnGreen}
+            >
+              서류 미리보기
+            </button>
+            <Modal
+              isOpen={modalOpen}
+              onRequestClose={closeModal}
+              ariaHideApp={false}
+              style={{
+                overlay: {
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                },
+                content: {
+                  top: "10%",
+                  left: "5%",
+                  right: "5%",
+                  bottom: "5%",
+                },
+              }}
+            >
+              <img className={styles.img} src={fileURL} alt="서류 미리보기" />
+            </Modal>
+          </>
+        )}
         <button
           onClick={onClick}
           type="button"
