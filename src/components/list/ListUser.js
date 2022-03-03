@@ -15,6 +15,12 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 const ListUser = ({ userData }) => {
   const navigate = useNavigate();
   const [dbData, setDbData] = useState([]);
+  const [search, setSearch] = useState({
+    통신사: "",
+    판매직원: "",
+    고객명: "",
+    개통번호: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,9 +45,24 @@ const ListUser = ({ userData }) => {
       navigate("/sales-list", { replace: true });
     }
   };
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    setDbData([]);
+    dbData.filter((e) => {
+      if (
+        e.통신사 === search.통신사 &&
+        e.판매직원 === search.판매직원 &&
+        e.고객명 === search.고객명 &&
+        e.개통번호 === search.개통번호
+      ) {
+        setDbData((prev) => [e, ...prev]);
+      }
+    });
+  };
   return (
     <>
-      <ListSearch />
+      <ListSearch setSearch={setSearch} search={search} onSearch={onSearch} />
       <ListHeader>
         {dbData.map((data, i) => (
           <form onSubmit={onClick} id={data.작성} key={i}>

@@ -10,11 +10,7 @@ const SalesList = (props) => {
         subTitle={"작성하신 모든 판매목록을 관리하실 수 있습니다."}
       />
       <ContentCard>
-        <ListUser
-          userData={props.userData}
-          setDbData={props.setDbData}
-          dbData={props.dbData}
-        />
+        <ListUser userData={props.userData} />
       </ContentCard>
     </>
   );
