@@ -15,6 +15,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 const ListUser = ({ userData }) => {
   const navigate = useNavigate();
   const [dbData, setDbData] = useState([]);
+  const [margin, setMargin] = useState(0);
   const [search, setSearch] = useState({
     통신사: "",
     판매직원: "",
@@ -29,6 +30,9 @@ const ListUser = ({ userData }) => {
         const dataInfo = doc.data();
         setDbData((prev) => {
           return [dataInfo, ...prev];
+        });
+        setMargin((prev) => {
+          return prev + Number(dataInfo.판매마진);
         });
       });
     };
@@ -60,6 +64,7 @@ const ListUser = ({ userData }) => {
       }
     });
   };
+  const average = margin / dbData.length;
   return (
     <>
       <ListSearch setSearch={setSearch} search={search} onSearch={onSearch} />
@@ -87,6 +92,11 @@ const ListUser = ({ userData }) => {
           </form>
         ))}
       </ListHeader>
+      <div className={styles.comment}>
+        <p>전체건수 : {dbData.length}건</p>
+        <p>평균마진 : {isNaN(average) ? 0 : average}원</p>
+        <p>전체마진 : {margin}원</p>
+      </div>
     </>
   );
 };

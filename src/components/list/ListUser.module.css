@@ -66,3 +66,12 @@
   margin-left: 6px;
   cursor: pointer;
 }
+
+.comment {
+  display: flex;
+  justify-content: space-around;
+}
+
+.comment > p {
+  margin-bottom: 0;
+}
