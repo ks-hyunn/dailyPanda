@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/dailyPanda/static/css/main.d87b2fe4.css",
+    "main.js": "/dailyPanda/static/js/main.0658ea3d.js",
+    "index.html": "/dailyPanda/index.html",
+    "main.d87b2fe4.css.map": "/dailyPanda/static/css/main.d87b2fe4.css.map",
+    "main.0658ea3d.js.map": "/dailyPanda/static/js/main.0658ea3d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d87b2fe4.css",
+    "static/js/main.0658ea3d.js"
+  ]
+}
